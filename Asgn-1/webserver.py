@@ -26,14 +26,9 @@ while True:
     connectionSocket, addr = serverSocket.accept()
     
     try:
-        # Fill in start - Receive the HTTP request from the client
-        # Hint: Use connectionSocket.recv() to receive data
-        # Store the received message in a variable
-        # Fill in end
-        
-        message = # Fill in start - Decode the received message
-                 # Hint: Convert bytes to string using .decode()
-                 # Fill in end
+        # Receive the HTTP request and decode it
+        raw = connectionSocket.recv(1024)     # bytes from client
+        message = raw.decode()                 # convert to str
         
         # Extract the filename from the HTTP request
         filename = message.split()[1]
@@ -41,9 +36,9 @@ while True:
         # Open the requested file
         f = open(filename[1:])  # Remove the leading '/' from filename
         
-        outputdata = # Fill in start - Read the content of the file
-                    # Hint: Use f.read() to read file content
-                    # Fill in end
+        # Read the content of the file
+        outputdata = f.read()
+
         
         header = (
             "HTTP/1.1 200 OK\r\n"
